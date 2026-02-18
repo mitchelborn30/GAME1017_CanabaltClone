@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] float velocity = 10;
+
+    private Rigidbody2D rigidbody;
+  
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+ 
+    void FixedUpdate()
     {
-        
+        //rigidbody.linearVelocity = new Vector2(velocity, rigidbody.linearVelocity.y);
+        transform.Translate(new Vector3(velocity, 0, 0) * Time.fixedDeltaTime);
     }
 }
