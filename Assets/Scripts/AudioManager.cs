@@ -22,4 +22,8 @@ public class AudioManager : MonoBehaviour
     //{
       //  musicTrack1 = GameObject.Find("Track0").GetComponent<AudioSource>();
     //}
+    public void SetSFXVolume (float volume)
+    {
+
+    }
 }
