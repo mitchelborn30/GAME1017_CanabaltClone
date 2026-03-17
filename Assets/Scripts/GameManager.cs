@@ -77,6 +77,11 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
+        Debug.Log("QuitGame called");
         Application.Quit();
+
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #endif
     }
 }

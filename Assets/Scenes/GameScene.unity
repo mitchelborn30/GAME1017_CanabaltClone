@@ -1391,6 +1391,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4129994766989753843, guid: e39ab64da6b950d4fb782c357ee31f66, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 63a8f27bcc881f14291297827a3c126d, type: 2}
     - target: {fileID: 6846016545785961410, guid: e39ab64da6b950d4fb782c357ee31f66, type: 3}
       propertyPath: m_Name
       value: Platform
@@ -1412,6 +1416,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4017967034265409001, guid: 7c8bbe6ef3d6fde49bfb416da5b8385b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 63a8f27bcc881f14291297827a3c126d, type: 2}
     - target: {fileID: 4287503465114291950, guid: 7c8bbe6ef3d6fde49bfb416da5b8385b, type: 3}
       propertyPath: jumpSpeed
       value: 10

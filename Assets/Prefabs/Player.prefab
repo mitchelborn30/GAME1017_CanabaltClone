@@ -423,7 +423,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 63a8f27bcc881f14291297827a3c126d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -489,5 +489,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5bad3677811014cb61e0a4670710e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  jumpSpeed: 20
-  jumpForce: 10
+  velocity: 10
