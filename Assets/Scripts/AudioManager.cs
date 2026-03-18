@@ -9,17 +9,17 @@ public class AudioManager : MonoBehaviour
 
     public void SetMasterVolume(float volume)
     {
-        mainMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
+        mainMixer.SetFloat("Volume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
     }
 
     public void SetMusicVolume(float volume)
     {
-        mainMixer.SetFloat("MusicVolume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
+        mainMixer.SetFloat("VolumeMusic", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
     }
 
     public void SetSFXVolume(float volume)
     {
-        mainMixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
+        mainMixer.SetFloat("VolumeSFX", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true)

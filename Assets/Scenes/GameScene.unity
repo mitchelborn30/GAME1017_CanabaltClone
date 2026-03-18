@@ -571,7 +571,6 @@ MonoBehaviour:
   firstPlatformY: -10
   minGap: 4
   maxGap: 5
-  chanceOfGap: 1
   safeStartingPlatforms: 2
   minY: -11
   maxY: -9
@@ -607,15 +606,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 515388312722303336, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 515388312722303336, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 515388312722303336, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 846403210947516933, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -632,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 4467043151032730044, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_Name
       value: AudioMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4467043151032730044, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5399542820813570134, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -707,11 +710,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6152111141767742741, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6152111141767742741, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6152111141767742741, guid: 96f6879e66b970b4f8df5c139072e4f0, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1358,6 +1361,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1907387351412499118, guid: e39ab64da6b950d4fb782c357ee31f66, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907387351412499118, guid: e39ab64da6b950d4fb782c357ee31f66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.3
       objectReference: {fileID: 0}
@@ -1524,8 +1531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abe2a1fd193339478e3f352395c3955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRunner
-  forwardSpeed: 11
-  jumpForce: 7
+  forwardSpeed: 12
+  jumpForce: 6
   groundCheck: {fileID: 487781405}
   groundCheckRadius: 0.2
   groundLayer:
