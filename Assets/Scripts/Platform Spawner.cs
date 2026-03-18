@@ -7,26 +7,41 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private GameObject platformPrefab;
     [SerializeField] private int startingPlatforms = 8;
 
+    [Header("Spawn Distances")]
     [SerializeField] private float spawnAheadDistance = 30f;
     [SerializeField] private float destroyBehindDistance = 20f;
-    [SerializeField] private float spawnY = -10f;
 
-    [Header("Gap Settings")]
-    [SerializeField] private float minGap = 30f;
-    [SerializeField] private float maxGap = 44f;
-    [SerializeField] private float chanceOfGap = 0.99f;
+    [Header("Starting Position")]
+    [SerializeField] private float firstPlatformX = 0f;
+    [SerializeField] private float firstPlatformY = -3f;
+
+    [Header("Horizontal Gap Settings")]
+    [SerializeField] private float minGap = 1f;
+    [SerializeField] private float maxGap = 2.5f;
+    [SerializeField] private int safeStartingPlatforms = 2;
+
+    [Header("Vertical Spawn Settings")]
+    [SerializeField] private float minY = -4f;
+    [SerializeField] private float maxY = 1f;
+    [SerializeField] private float minYStep = -1f;
+    [SerializeField] private float maxYStep = 1f;
 
     private float platformWidth;
-    private float nextSpawnX = 18f;
+    private float nextSpawnX;
+    private float nextSpawnY;
+
     private List<GameObject> spawnedPlatforms = new List<GameObject>();
 
     private void Start()
     {
-        platformWidth = platformPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+        platformWidth = platformPrefab.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+
+        nextSpawnX = firstPlatformX;
+        nextSpawnY = firstPlatformY;
 
         for (int i = 0; i < startingPlatforms; i++)
         {
-            SpawnPlatform();
+            SpawnPlatform(i);
         }
     }
 
@@ -36,26 +51,29 @@ public class PlatformSpawner : MonoBehaviour
 
         while (nextSpawnX < player.position.x + spawnAheadDistance)
         {
-            SpawnPlatform();
+            SpawnPlatform(spawnedPlatforms.Count);
         }
 
         RemoveOldPlatforms();
     }
 
-    private void SpawnPlatform()
+
+    private void SpawnPlatform(int platformIndex)
     {
-        Vector3 spawnPos = new Vector3(nextSpawnX, spawnY, 0f);
+        Vector3 spawnPos = new Vector3(nextSpawnX, nextSpawnY, 0f);
         GameObject platform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
         spawnedPlatforms.Add(platform);
 
-        float gapSize = 0f;
-
-        if (Random.value < chanceOfGap)
-        {
-            gapSize = Random.Range(minGap, maxGap);
-        }
+        float gapSize = Random.Range(minGap, maxGap);
 
         nextSpawnX += platformWidth + gapSize;
+
+        if (platformIndex >= safeStartingPlatforms)
+        {
+            float randomYStep = Random.Range(minYStep, maxYStep);
+            nextSpawnY += randomYStep;
+            nextSpawnY = Mathf.Clamp(nextSpawnY, minY, maxY);
+        }
     }
 
     private void RemoveOldPlatforms()

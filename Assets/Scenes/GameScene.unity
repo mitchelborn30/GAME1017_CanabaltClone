@@ -567,10 +567,16 @@ MonoBehaviour:
   startingPlatforms: 8
   spawnAheadDistance: 30
   destroyBehindDistance: 20
-  spawnY: -10
+  firstPlatformX: 0
+  firstPlatformY: -10
   minGap: 4
   maxGap: 5
   chanceOfGap: 1
+  safeStartingPlatforms: 2
+  minY: -11
+  maxY: -9
+  minYStep: -2
+  maxYStep: 2
 --- !u!4 &1034830307
 Transform:
   m_ObjectHideFlags: 0
@@ -1518,8 +1524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abe2a1fd193339478e3f352395c3955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRunner
-  forwardSpeed: 9
-  jumpForce: 5
+  forwardSpeed: 11
+  jumpForce: 7
   groundCheck: {fileID: 487781405}
   groundCheckRadius: 0.2
   groundLayer:
