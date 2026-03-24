@@ -24,10 +24,4 @@ public class AudioUIController : MonoBehaviour
         if (GameManager.Instance == null || GameManager.Instance.AudioManager == null) return;
         GameManager.Instance.AudioManager.SetMusicVolume(value);
     }
-
-    public void OnSFXSliderChanged(float value)
-    {
-        if (GameManager.Instance == null || GameManager.Instance.AudioManager == null) return;
-        GameManager.Instance.AudioManager.SetSFXVolume(value);
-    }
 }

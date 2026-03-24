@@ -47,26 +47,4 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance == null) return;
         GameManager.Instance.QuitGame();
     }
-
-    /*public void OnMasterSliderChanged(float value)
-    {
-        if (GameManager.Instance == null || GameManager.Instance.AudioManager == null)
-        {
-            Debug.LogError("AudioManager is NULL");
-            return;
-        }
-
-        GameManager.Instance.AudioManager.SetMasterVolume(value);
-    }
-
-    public void OnMusicSliderChanged(float value)
-    {
-        if (GameManager.Instance == null || GameManager.Instance.AudioManager == null)
-        {
-            Debug.LogError("AudioManager is NULL");
-            return;
-        }
-
-        GameManager.Instance.AudioManager.SetMusicVolume(value);
-    }*/
 }
