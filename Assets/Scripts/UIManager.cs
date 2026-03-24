@@ -3,6 +3,8 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+
+    [Header("UI References")]
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text finalTimeText;
 
@@ -24,32 +26,47 @@ public class UIManager : MonoBehaviour
 
     public void OnStartButtonPressed()
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.StartGame();
     }
 
     public void OnRestartButtonPressed()
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.RestartGame();
     }
 
     public void OnReturnToTitlePressed()
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.LoadTitleScene();
-    }
-
-    public void OnMusicSliderChanged(float value)
-    {
-        GameManager.Instance.AudioManager.SetMusicVolume(value);
-    }
-
-    public void OnSFXSliderChanged(float value)
-    {
-        GameManager.Instance.AudioManager.SetSFXVolume(value);
     }
 
     public void OnQuitButtonPressed()
     {
+        if (GameManager.Instance == null) return;
         GameManager.Instance.QuitGame();
     }
 
+    /*public void OnMasterSliderChanged(float value)
+    {
+        if (GameManager.Instance == null || GameManager.Instance.AudioManager == null)
+        {
+            Debug.LogError("AudioManager is NULL");
+            return;
+        }
+
+        GameManager.Instance.AudioManager.SetMasterVolume(value);
+    }
+
+    public void OnMusicSliderChanged(float value)
+    {
+        if (GameManager.Instance == null || GameManager.Instance.AudioManager == null)
+        {
+            Debug.LogError("AudioManager is NULL");
+            return;
+        }
+
+        GameManager.Instance.AudioManager.SetMusicVolume(value);
+    }*/
 }

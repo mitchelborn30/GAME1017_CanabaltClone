@@ -65,12 +65,4 @@ public class PlayerRunner : MonoBehaviour
         isDead = true;
         GameManager.Instance.GameOver();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheck == null) return;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-    }
 }
