@@ -4,18 +4,12 @@ using UnityEngine.UI;
 public class AudioUIController : MonoBehaviour
 {
     [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
 
     private void Start()
     {
         if (musicSlider != null)
         {
             musicSlider.value = 1f;
-        }
-
-        if (sfxSlider != null)
-        {
-            sfxSlider.value = 1f;
         }
     }
 

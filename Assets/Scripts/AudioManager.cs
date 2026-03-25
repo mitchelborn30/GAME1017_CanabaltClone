@@ -32,12 +32,5 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = loop;
         musicSource.Play();
     }
-
-    public void PlaySFX(AudioClip clip)
-    {
-        if (sfxSource == null || clip == null) return;
-
-        sfxSource.PlayOneShot(clip);
-    }
 }
 

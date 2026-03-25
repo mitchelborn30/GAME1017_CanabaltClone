@@ -15,12 +15,12 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private float firstPlatformX = 0f;
     [SerializeField] private float firstPlatformY = -3f;
 
-    [Header("Horizontal Gap Settings")]
+    [Header("Gap Settings")]
     [SerializeField] private float minGap = 1f;
     [SerializeField] private float maxGap = 2.5f;
     [SerializeField] private int safeStartingPlatforms = 2;
 
-    [Header("Vertical Spawn Settings")]
+    [Header("Height Settings")]
     [SerializeField] private float minY = -4f;
     [SerializeField] private float maxY = 1f;
     [SerializeField] private float minYStep = -1f;
