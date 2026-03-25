@@ -1389,14 +1389,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abe2a1fd193339478e3f352395c3955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRunner
-  forwardSpeed: 12
-  jumpForce: 6
+  speedMin: 4
+  speedMax: 9
+  acceleration: 2
+  jumpVelocity: 7
+  jumpFloatDuration: 0.3
+  jumpFloatForce: 8
   groundCheck: {fileID: 487781405}
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  minYDeath: -10
+  killHeight: -10
 --- !u!1001 &5673622026403752971
 PrefabInstance:
   m_ObjectHideFlags: 0
