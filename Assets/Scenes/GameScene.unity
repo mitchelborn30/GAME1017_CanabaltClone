@@ -1222,6 +1222,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1907387351412499118, guid: e39ab64da6b950d4fb782c357ee31f66, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907387351412499118, guid: e39ab64da6b950d4fb782c357ee31f66, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.3
       objectReference: {fileID: 0}
@@ -1389,10 +1393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abe2a1fd193339478e3f352395c3955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRunner
-  speedMin: 4
-  speedMax: 9
+  speedMin: 8
+  speedMax: 16
   acceleration: 2
-  jumpVelocity: 7
+  jumpVelocity: 6
   jumpFloatDuration: 0.3
   jumpFloatForce: 8
   groundCheck: {fileID: 487781405}
@@ -1420,6 +1424,10 @@ PrefabInstance:
     - target: {fileID: 1641975568399564089, guid: 75e85c269b8a546419d194a3e3d663be, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030585304733467733, guid: 75e85c269b8a546419d194a3e3d663be, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6030585304733467733, guid: 75e85c269b8a546419d194a3e3d663be, type: 3}
       propertyPath: m_LocalPosition.x

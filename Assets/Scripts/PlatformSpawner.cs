@@ -62,6 +62,11 @@ public class PlatformSpawner : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3(nextSpawnX, nextSpawnY, 0f);
         GameObject platform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
+
+        platform.transform.localScale = new Vector3(Random.Range(15f, 30f), 6f, 1f);
+        float platformWidth = platform.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+
+
         spawnedPlatforms.Add(platform);
 
         float gapSize = Random.Range(minGap, maxGap);
