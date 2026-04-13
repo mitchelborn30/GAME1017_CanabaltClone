@@ -16,8 +16,8 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private float firstPlatformY = -3f;
 
     [Header("Gap Settings")]
-    [SerializeField] private float minGap = 1f;
-    [SerializeField] private float maxGap = 2.5f;
+    [SerializeField] private float minGap = 6f;
+    [SerializeField] private float maxGap = 7f;
     [SerializeField] private int safeStartingPlatforms = 2;
 
     [Header("Height Settings")]
@@ -26,15 +26,24 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private float minYStep = -1f;
     [SerializeField] private float maxYStep = 1f;
 
-    private float platformWidth;
+    [Header("Platform Length Settings")]
+    [SerializeField] private float minScaleX = 15f;
+    [SerializeField] private float maxScaleX = 30f;
+
+    [Header("Obstacle Settings")] 
+    [SerializeField] private GameObject obstaclePrefab; 
+    [SerializeField] private float obstacleChance = 0.4f; 
+
+    private float basePlatformWidth;
     private float nextSpawnX;
     private float nextSpawnY;
 
     private List<GameObject> spawnedPlatforms = new List<GameObject>();
+    private List<GameObject> spawnedObstacles = new List<GameObject>(); 
 
     private void Start()
     {
-        platformWidth = platformPrefab.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        basePlatformWidth = platformPrefab.GetComponentInChildren<SpriteRenderer>().bounds.size.x / platformPrefab.transform.localScale.x;
 
         nextSpawnX = firstPlatformX;
         nextSpawnY = firstPlatformY;
@@ -55,19 +64,33 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         RemoveOldPlatforms();
+        RemoveOldObstacles(); 
     }
-
 
     private void SpawnPlatform(int platformIndex)
     {
-        Vector3 spawnPos = new Vector3(nextSpawnX, nextSpawnY, 0f);
+        float randomScaleX = Random.Range(minScaleX, maxScaleX);
+        float platformWidth = basePlatformWidth * randomScaleX;
+
+        Vector3 spawnPos = new Vector3(nextSpawnX + platformWidth * 0.5f, nextSpawnY, 0f);
         GameObject platform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
 
-        platform.transform.localScale = new Vector3(Random.Range(15f, 30f), 6f, 1f);
-        float platformWidth = platform.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
-
+        platform.transform.localScale = new Vector3(randomScaleX, platform.transform.localScale.y,
+        platform.transform.localScale.z);
 
         spawnedPlatforms.Add(platform);
+
+        if (platformIndex >= safeStartingPlatforms && obstaclePrefab != null && Random.value < obstacleChance) 
+        {
+            SpriteRenderer platformSR = platform.GetComponentInChildren<SpriteRenderer>(); 
+            SpriteRenderer obstacleSR = obstaclePrefab.GetComponentInChildren<SpriteRenderer>(); 
+
+            float obstacleX = platform.transform.position.x; 
+            float obstacleY = platformSR.bounds.max.y + obstacleSR.bounds.extents.y; 
+
+            GameObject obstacle = Instantiate(obstaclePrefab, new Vector3(obstacleX, obstacleY, 0f), Quaternion.identity); 
+            spawnedObstacles.Add(obstacle); 
+        }
 
         float gapSize = Random.Range(minGap, maxGap);
 
@@ -95,6 +118,24 @@ public class PlatformSpawner : MonoBehaviour
             {
                 Destroy(spawnedPlatforms[i]);
                 spawnedPlatforms.RemoveAt(i);
+            }
+        }
+    }
+
+    private void RemoveOldObstacles() 
+    {
+        for (int i = spawnedObstacles.Count - 1; i >= 0; i--) 
+        {
+            if (spawnedObstacles[i] == null) 
+            {
+                spawnedObstacles.RemoveAt(i); 
+                continue; 
+            }
+
+            if (spawnedObstacles[i].transform.position.x < player.position.x - destroyBehindDistance) 
+            {
+                Destroy(spawnedObstacles[i]); 
+                spawnedObstacles.RemoveAt(i); 
             }
         }
     }
