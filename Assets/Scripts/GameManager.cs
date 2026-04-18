@@ -15,11 +15,13 @@ public class GameManager : MonoBehaviour
 
     private float runTimer = 0f;
     private float finalTime = 0f;
+    private float highScore = 0f;  
     private bool timerRunning = false;
 
     public AudioManager AudioManager => audioManager;
     public float CurrentRunTime => runTimer;
     public float FinalTime => finalTime;
+    public float HighScore => highScore;  
 
     private void Awake()
     {
@@ -36,6 +38,12 @@ public class GameManager : MonoBehaviour
         {
             audioManager = GetComponent<AudioManager>();
         }
+    }
+
+    private void Start()
+    {
+        highScore = SaveSystem.GetHighScore();  
+
     }
 
     private void Update()
@@ -58,6 +66,10 @@ public class GameManager : MonoBehaviour
     {
         timerRunning = false;
         finalTime = runTimer;
+
+        SaveSystem.AddScore(finalTime);  
+        highScore = SaveSystem.GetHighScore();  
+
         SceneManager.LoadScene(gameOverSceneName);
     }
 
@@ -72,6 +84,7 @@ public class GameManager : MonoBehaviour
     public void LoadTitleScene()
     {
         timerRunning = false;
+        highScore = SaveSystem.GetHighScore();  
         SceneManager.LoadScene(titleSceneName);
     }
 
