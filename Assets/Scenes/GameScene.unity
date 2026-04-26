@@ -521,7 +521,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -565,19 +565,21 @@ MonoBehaviour:
   player: {fileID: 4595210524884491823}
   platformPrefab: {fileID: 492169195}
   startingPlatforms: 8
-  spawnAheadDistance: 30
-  destroyBehindDistance: 20
+  spawnAheadDistance: 60
+  destroyBehindDistance: 80
   firstPlatformX: 0
   firstPlatformY: -10
-  minGap: 7
-  maxGap: 8
-  safeStartingPlatforms: 2
-  minY: -11
-  maxY: -9
-  minYStep: -2
-  maxYStep: 2
-  minScaleX: 15
-  maxScaleX: 30
+  minGap: 8
+  maxGap: 13
+  speedThreshold: 20
+  increasedMaxGap: 18
+  increasedObstacleChance: 0.8
+  minY: -13
+  maxY: -7
+  minYStep: -3
+  maxYStep: 3
+  minScaleX: 35
+  maxScaleX: 50
   obstaclePrefab: {fileID: 1809045029}
   obstacleChance: 0.4
 --- !u!4 &1034830307
@@ -1352,6 +1354,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8745148720867945840, guid: 7c8bbe6ef3d6fde49bfb416da5b8385b, type: 3}
+      propertyPath: orthographic size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745148720867945840, guid: 7c8bbe6ef3d6fde49bfb416da5b8385b, type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0.7106918
       objectReference: {fileID: 0}
@@ -1402,12 +1408,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abe2a1fd193339478e3f352395c3955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRunner
-  speedMin: 8
-  speedMax: 13
-  acceleration: 2
-  jumpVelocity: 5
-  jumpFloatDuration: 0.2
-  jumpFloatForce: 6
+  speedMin: 12
+  speedMax: 24
+  acceleration: 0.1
+  jumpVelocity: 8
+  jumpFloatDuration: 6
+  jumpFloatForce: 8
   groundCheck: {fileID: 487781405}
   groundCheckRadius: 0.2
   groundLayer:
@@ -1537,7 +1543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4071089126568686794, guid: f4dc5ff2e3738734d9643947cabf0269, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

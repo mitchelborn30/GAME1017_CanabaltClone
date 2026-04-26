@@ -8,17 +8,22 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private int startingPlatforms = 8;
 
     [Header("Spawn Distances")]
-    [SerializeField] private float spawnAheadDistance = 30f;
-    [SerializeField] private float destroyBehindDistance = 20f;
+    [SerializeField] private float spawnAheadDistance = 60f;
+    [SerializeField] private float destroyBehindDistance = 80f;
 
     [Header("Starting Position")]
     [SerializeField] private float firstPlatformX = 0f;
-    [SerializeField] private float firstPlatformY = -3f;
+    [SerializeField] private float firstPlatformY = -10f;
 
     [Header("Gap Settings")]
-    [SerializeField] private float minGap = 6f;
-    [SerializeField] private float maxGap = 7f;
-    [SerializeField] private int safeStartingPlatforms = 2;
+    [SerializeField] private float minGap = 8f;
+    [SerializeField] private float maxGap = 13f;
+
+    [Header("Difficulty Settings")]
+    [SerializeField] private float speedThreshold = 20f; 
+    [SerializeField] private float increasedMaxGap = 18f; 
+    [SerializeField] private float increasedObstacleChance = 0.8f; 
+    private bool difficultyIncreased = false; 
 
     [Header("Height Settings")]
     [SerializeField] private float minY = -4f;
@@ -30,16 +35,16 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private float minScaleX = 15f;
     [SerializeField] private float maxScaleX = 30f;
 
-    [Header("Obstacle Settings")] 
-    [SerializeField] private GameObject obstaclePrefab; 
-    [SerializeField] private float obstacleChance = 0.4f; 
+    [Header("Obstacle Settings")]
+    [SerializeField] private GameObject obstaclePrefab;
+    [SerializeField] private float obstacleChance = 0.4f;
 
     private float basePlatformWidth;
     private float nextSpawnX;
     private float nextSpawnY;
 
     private List<GameObject> spawnedPlatforms = new List<GameObject>();
-    private List<GameObject> spawnedObstacles = new List<GameObject>(); 
+    private List<GameObject> spawnedObstacles = new List<GameObject>();
 
     private void Start()
     {
@@ -58,13 +63,26 @@ public class PlatformSpawner : MonoBehaviour
     {
         if (player == null) return;
 
+        
+        if (!difficultyIncreased) 
+        {
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>(); 
+
+            if (rb != null && rb.linearVelocity.x >= speedThreshold) 
+            {
+                maxGap = increasedMaxGap; 
+                obstacleChance = Mathf.Clamp(increasedObstacleChance, 0f, 1f); 
+                difficultyIncreased = true; 
+            }
+        }
+
         while (nextSpawnX < player.position.x + spawnAheadDistance)
         {
             SpawnPlatform(spawnedPlatforms.Count);
         }
 
         RemoveOldPlatforms();
-        RemoveOldObstacles(); 
+        RemoveOldObstacles();
     }
 
     private void SpawnPlatform(int platformIndex)
@@ -75,33 +93,32 @@ public class PlatformSpawner : MonoBehaviour
         Vector3 spawnPos = new Vector3(nextSpawnX + platformWidth * 0.5f, nextSpawnY, 0f);
         GameObject platform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
 
-        platform.transform.localScale = new Vector3(randomScaleX, platform.transform.localScale.y,
-        platform.transform.localScale.z);
+        platform.transform.localScale = new Vector3(
+            randomScaleX,
+            platform.transform.localScale.y,
+            platform.transform.localScale.z
+        );
 
         spawnedPlatforms.Add(platform);
 
-        if (platformIndex >= safeStartingPlatforms && obstaclePrefab != null && Random.value < obstacleChance) 
+        if (obstaclePrefab != null && Random.value < obstacleChance)
         {
-            SpriteRenderer platformSR = platform.GetComponentInChildren<SpriteRenderer>(); 
-            SpriteRenderer obstacleSR = obstaclePrefab.GetComponentInChildren<SpriteRenderer>(); 
+            SpriteRenderer platformSR = platform.GetComponentInChildren<SpriteRenderer>();
+            SpriteRenderer obstacleSR = obstaclePrefab.GetComponentInChildren<SpriteRenderer>();
 
-            float obstacleX = platform.transform.position.x; 
-            float obstacleY = platformSR.bounds.max.y + obstacleSR.bounds.extents.y; 
+            float obstacleX = platform.transform.position.x;
+            float obstacleY = platformSR.bounds.max.y + obstacleSR.bounds.extents.y;
 
-            GameObject obstacle = Instantiate(obstaclePrefab, new Vector3(obstacleX, obstacleY, 0f), Quaternion.identity); 
-            spawnedObstacles.Add(obstacle); 
+            GameObject obstacle = Instantiate(obstaclePrefab, new Vector3(obstacleX, obstacleY, 0f), Quaternion.identity);
+            spawnedObstacles.Add(obstacle);
         }
 
         float gapSize = Random.Range(minGap, maxGap);
-
         nextSpawnX += platformWidth + gapSize;
 
-        if (platformIndex >= safeStartingPlatforms)
-        {
-            float randomYStep = Random.Range(minYStep, maxYStep);
-            nextSpawnY += randomYStep;
-            nextSpawnY = Mathf.Clamp(nextSpawnY, minY, maxY);
-        }
+        float randomYStep = Random.Range(minYStep, maxYStep);
+        nextSpawnY += randomYStep;
+        nextSpawnY = Mathf.Clamp(nextSpawnY, minY, maxY);
     }
 
     private void RemoveOldPlatforms()
@@ -122,20 +139,20 @@ public class PlatformSpawner : MonoBehaviour
         }
     }
 
-    private void RemoveOldObstacles() 
+    private void RemoveOldObstacles()
     {
-        for (int i = spawnedObstacles.Count - 1; i >= 0; i--) 
+        for (int i = spawnedObstacles.Count - 1; i >= 0; i--)
         {
-            if (spawnedObstacles[i] == null) 
+            if (spawnedObstacles[i] == null)
             {
-                spawnedObstacles.RemoveAt(i); 
-                continue; 
+                spawnedObstacles.RemoveAt(i);
+                continue;
             }
 
-            if (spawnedObstacles[i].transform.position.x < player.position.x - destroyBehindDistance) 
+            if (spawnedObstacles[i].transform.position.x < player.position.x - destroyBehindDistance)
             {
-                Destroy(spawnedObstacles[i]); 
-                spawnedObstacles.RemoveAt(i); 
+                Destroy(spawnedObstacles[i]);
+                spawnedObstacles.RemoveAt(i);
             }
         }
     }

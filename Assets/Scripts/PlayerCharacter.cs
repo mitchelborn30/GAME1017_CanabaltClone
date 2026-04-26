@@ -3,13 +3,13 @@ using UnityEngine;
 public class PlayerCharacter : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float speedMin = 4f;
-    [SerializeField] private float speedMax = 9f;
-    [SerializeField] private float acceleration = 2f;
+    [SerializeField] private float speedMin = 12f;
+    [SerializeField] private float speedMax = 24f;
+    [SerializeField] private float acceleration = 0.1f;
 
     [Header("Jump")]
-    [SerializeField] private float jumpVelocity = 7f;
-    [SerializeField] private float jumpFloatDuration = 0.3f;
+    [SerializeField] private float jumpVelocity = 8f;
+    [SerializeField] private float jumpFloatDuration = 6f;
     [SerializeField] private float jumpFloatForce = 8f;
 
     [Header("Ground Check")]
