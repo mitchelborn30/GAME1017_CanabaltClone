@@ -38,9 +38,9 @@ public class PlayerCharacter : MonoBehaviour
 
         CheckGrounded();
 
-        isJumpPressed = Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0);
+        isJumpPressed = Input.GetKey(KeyCode.Space);
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) && isGrounded))
         {
             Jump();
         }
@@ -88,6 +88,11 @@ public class PlayerCharacter : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
         isGrounded = false;
         jumpFloatTimer = jumpFloatDuration;
+
+        if (GameManager.Instance != null && GameManager.Instance.AudioManager != null)
+        {
+            GameManager.Instance.AudioManager.PlayJump();
+        }
     }
 
     private void Float()

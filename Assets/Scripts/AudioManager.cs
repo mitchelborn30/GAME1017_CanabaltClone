@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixer mainMixer;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip jumpClip;
 
     public void SetMasterVolume(float volume)
     {
@@ -31,6 +32,14 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = clip;
         musicSource.loop = loop;
         musicSource.Play();
+    }
+
+    public void PlayJump()
+    {
+        if (sfxSource != null && jumpClip != null)
+        {
+            sfxSource.PlayOneShot(jumpClip);
+        }
     }
 }
 
